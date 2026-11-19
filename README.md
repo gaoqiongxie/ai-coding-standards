@@ -25,6 +25,34 @@ AI 生成代码有一些人类少犯、AI 高频踩的坑，每条规则尽量�
 | [rules/git-safety.md](rules/git-safety.md) | 操作权限矩阵 / 历史红线（禁 force push 等）/ 提交规范 / 提交前 Checklist | 所有把 Git 交给 AI 的场景 |
 | [rules/change-discipline.md](rules/change-discipline.md) | 需求变更防返工五阶段：冻结前确认 → 设计强制章节 → 编码前影响扫描 → 自测场景 → 返工红线 | 需求开发全周期 |
 
+## 最快接入：让 AI 把规范装进你的项目
+
+把下面这段 prompt **原样**发给你项目里的 AI 编码助手（Claude Code / Trae / Kimi / Cursor 均可），它会把本仓库的规则合并进你项目的规则入口：
+
+```text
+我要给当前项目接入一套 AI 编码规范，仓库地址：
+https://github.com/gaoqiongxie/ai-coding-standards
+
+请先通读该仓库的 README.md 和 rules/ 下四个文件，然后帮我完成接入：
+
+1. 先盘点我项目现状（语言、框架、现有规则入口文件），再从四个规则文件里挑适用的部分：
+   - Java + Spring + MyBatis 后端 → backend-java.md
+   - Vue 前端 → frontend-baseline.md
+   - 任何把 Git 交给 AI 的场景 → git-safety.md（必装）
+   - 需求开发全周期 → change-discipline.md
+2. 把选定规则合并进我项目的规则入口（Claude Code 用 CLAUDE.md，Codex/通用 用
+   AGENTS.md，Trae/Kimi 用 .trae/rules/），合并前先 diff 现有内容，冲突处列出对比
+   给我看，确认后再落盘
+3. 模板类占位（包名前缀、表名前缀、分支名、提交格式）按我项目实际约定替换，
+   但每条规则「AI 为什么爱犯」的注释必须保留
+4. 在规则入口里加一句总纲：以上规则仅对新增/修改代码生效，历史代码保持不动，不批量迁移
+
+【红线】
+- 只改规则入口文件，不因为我项目历史代码不符合规范就提出"批量重构"
+- 不删改我项目已有的团队约定；与本规范冲突时列出来让我裁决，不要自行覆盖
+- 接入完成后给我一份摘要：装了哪几份规则、替换了哪些占位、有哪些地方需要我人工裁决
+```
+
 ## 怎么用
 
 **方式一：项目规则文件（推荐）**
